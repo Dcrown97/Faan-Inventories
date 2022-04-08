@@ -187,9 +187,9 @@
                                             <div class="form-group">
                                                 <select name="category" id="roomfeatures" class="form-control">
                                                     <option value="">Category</option>
-                                                    <option value="category">Category1</option>
-                                                    <option value="category">Category2</option>
-                                                    <option value="category">Category3</option>
+                                                    <option value="category1">Category1</option>
+                                                    <option value="category2">Category2</option>
+                                                    <option value="category3">Category3</option>
                                                 </select>
                                                 <span class="text-danger">
                                                     @error('category')
