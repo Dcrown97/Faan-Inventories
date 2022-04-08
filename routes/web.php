@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 //     return view('welcome');
 // });
 
-Route::match(['get', 'post'], '/home', [FaanController::class, 'Home'])->name('home');
+Route::match(['get', 'post'], '/', [FaanController::class, 'Home'])->name('home');
