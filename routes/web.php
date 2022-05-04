@@ -20,3 +20,4 @@ use Illuminate\Support\Facades\Route;
 
 Route::match(['get', 'post'], '/', [FaanController::class, 'Home'])->name('home');
 Route::match(['get', 'post'], '/search', [FaanController::class, 'Search'])->name('search');
+Route::match(['get', 'post'], '/category', [FaanController::class, 'Category'])->name('category');

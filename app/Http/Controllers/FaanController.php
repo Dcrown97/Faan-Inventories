@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Inventory;
 use Illuminate\Http\Request;
 
@@ -10,7 +11,8 @@ class FaanController extends Controller
     public function Home(Request $request)
     {
 
-        $inventories = Inventory::all();
+        $inventories = Inventory::paginate(10);
+        $categories = Category::all();
         // dd($inventories);
 
         if ($request->isMethod('POST')) {
@@ -41,7 +43,7 @@ class FaanController extends Controller
                 return redirect()->route('home')->with('error', 'Inventory not added');
             }
         }
-        return view('home', compact('inventories'));
+        return view('home', compact('inventories', 'categories'));
     }
 
     public function Search(Request $request)
@@ -58,9 +60,29 @@ class FaanController extends Controller
                 ->get();
 
             $results = $results1;
+            // dd($results);
             return view('home', compact('results'));
         }
 
         return view('home', compact('results'));
+    }
+
+    public function Category(Request $request)
+    {
+        $categories = Category::all();
+        if ($request->isMethod('post')) {
+            $request->validate([
+                'name' => 'required',
+            ]);
+            $categories = new Category();
+            $categories->name = $request->name;
+            $categories->save();
+            if ($categories->save()) {
+                return redirect()->route('category')->with('success', 'Category added successfully');
+            } else {
+                return redirect()->route('category')->with('error', 'Category not added');
+            }
+        }
+        return view('addcategory', compact('categories'));
     }
 }
