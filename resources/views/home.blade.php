@@ -32,6 +32,13 @@
             </li>
             <hr class="sidebar-divider">
             <li class="nav-item">
+                <a class="nav-link collapsed" href="/category" aria-expanded="true" aria-controls="collapseForm">
+                    <i class="fab fa-fw fa-wpforms"></i>
+                    <span>Category</span>
+                </a>
+
+            </li>
+            <li class="nav-item">
                 <a class="nav-link collapsed" href="/" aria-expanded="true" aria-controls="collapseForm">
                     <i class="fab fa-fw fa-wpforms"></i>
                     <span>Inventories</span>
@@ -105,6 +112,11 @@
                                                         <td>{{ $inventory->time }}</td>
                                                     </tr>
                                                 @endforeach
+                                                <caption>
+                                                    {{ $inventories->links('vendor.pagination.bootstrap-5') }}
+
+
+                                                </caption>
                                             @endif
 
                                             @if (isset($results) && count($results) > 0)
@@ -121,6 +133,8 @@
                                                         <td>{{ $result->time }}</td>
                                                     </tr>
                                                 @endforeach
+                                                {{-- {{ $results->count() > 0 ? $results->links('vendor.pagination.bootstrap-5') : '' }} --}}
+
                                             @endif
                                         </tbody>
                                     </table>
@@ -186,10 +200,13 @@
                                             </div>
                                             <div class="form-group">
                                                 <select name="category" id="roomfeatures" class="form-control">
-                                                    <option value="">Category</option>
-                                                    <option value="category1">Category1</option>
-                                                    <option value="category2">Category2</option>
-                                                    <option value="category3">Category3</option>
+                                                    <option value="" selected>Select Category</option>
+                                                    @if (isset($categories) && count($categories) > 0)
+                                                        @foreach ($categories as $category)
+                                                            <option value="{{ $category->name }}">
+                                                                {{ $category->name }}</option>
+                                                        @endforeach
+                                                    @endif
                                                 </select>
                                                 <span class="text-danger">
                                                     @error('category')
